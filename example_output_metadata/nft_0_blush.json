@@ -1,0 +1,31 @@
+{
+    "name": "Masked #0",
+    "description": "A mysterious mask NFT reflecting wallet activity.",
+    "image": "https://tan-labour-roundworm-161.mypinata.cloud/ipfs/bafybeiavz2i3hx43spsjwltgmdzyrnsyvlbdjjzgd4y37ihsmhsjd3wzg4/nft_0/nft_0_blush.png",
+    "attributes": [
+        {
+            "trait_type": "Background",
+            "value": "purp2.png"
+        },
+        {
+            "trait_type": "Mask",
+            "value": "mask2_purple.png"
+        },
+        {
+            "trait_type": "Eyes",
+            "value": "maskpurp_botheye3.png"
+        },
+        {
+            "trait_type": "Band",
+            "value": "lightning/band_lightning_white.png"
+        },
+        {
+            "trait_type": "Tear",
+            "value": "tears_black.png"
+        },
+        {
+            "trait_type": "Blush",
+            "value": "blush_red.png"
+        }
+    ]
+}
