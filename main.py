@@ -3,7 +3,6 @@ import random
 import os
 import json
 
-
 # define layer paths
 LAYER_PATHS = {
     "backgrounds": "layers/backgrounds",
@@ -136,25 +135,59 @@ def generate_nft(nft_id):
     output_image_file = os.path.join(output_image_folder, f"nft_{nft_id}.png")
     final_image = final_image.resize((3000, 3000))
     final_image.save(output_image_file)
+    print(f"✅ NFT {nft_id} saved to {output_image_file}")
     output_image_file = os.path.join(output_image_folder, f"nft_{nft_id}_tears.png")
     final_image_tears = final_image_tears.resize((3000, 3000))
     final_image_tears.save(output_image_file)
+    print(f"✅ NFT {nft_id}_tears saved to {output_image_file}")
     output_image_file = os.path.join(output_image_folder, f"nft_{nft_id}_blush.png")
     final_image_blush = final_image_blush.resize((3000, 3000))
     final_image_blush.save(output_image_file)
-    print(f"✅ NFT {nft_id} saved to {output_image_file}")
+    print(f"✅ NFT {nft_id}_blush saved to {output_image_file}")
         
     # Save unique attributes
     existing_attributes.append(attribute_set)
     with open(ATTRIBUTE_LOG_PATH, 'w') as f:
         json.dump(existing_attributes, f, indent=4)
-    
+
     # generate metadata
     metadata_file = os.path.join(OUTPUT_METADATA_PATH, f"nft_{nft_id}.json")
     metadata_content = {
         "name": f"Masked #{nft_id}",
         "description": "A mysterious mask NFT reflecting wallet activity.",
-        "image": f"ipfs://.../nft_{nft_id}.png",
+        "image": f"blank/nft_{nft_id}/nft_{nft_id}.png",
+        "attributes": [
+            {"trait_type": "Background", "value": metadata["Background"]},
+            {"trait_type": "Mask", "value": metadata["Mask"]},
+            {"trait_type": "Eyes", "value": metadata["Eyes"]},
+            {"trait_type": "Band", "value": metadata["Band"]},
+            {"trait_type": "Tear", "value": metadata["Tear"]},
+            {"trait_type": "Blush", "value": metadata["Blush"]}
+        ]
+    }
+
+    # generate metadata
+    metadata_file_tears = os.path.join(OUTPUT_METADATA_PATH, f"nft_{nft_id}_tears.json")
+    metadata_content_tears = {
+        "name": f"Masked #{nft_id}",
+        "description": "A mysterious mask NFT reflecting wallet activity.",
+            "image": f"blank/nft_{nft_id}/nft_{nft_id}_tears.png",
+        "attributes": [
+            {"trait_type": "Background", "value": metadata["Background"]},
+            {"trait_type": "Mask", "value": metadata["Mask"]},
+            {"trait_type": "Eyes", "value": metadata["Eyes"]},
+            {"trait_type": "Band", "value": metadata["Band"]},
+            {"trait_type": "Tear", "value": metadata["Tear"]},
+            {"trait_type": "Blush", "value": metadata["Blush"]}
+        ]
+    }
+
+    # generate metadata
+    metadata_file_blush = os.path.join(OUTPUT_METADATA_PATH, f"nft_{nft_id}_blush.json")
+    metadata_content_blush = {
+        "name": f"Masked #{nft_id}",
+        "description": "A mysterious mask NFT reflecting wallet activity.",
+        "image": f"blank/nft_{nft_id}/nft_{nft_id}_blush.png",
         "attributes": [
             {"trait_type": "Background", "value": metadata["Background"]},
             {"trait_type": "Mask", "value": metadata["Mask"]},
@@ -167,13 +200,19 @@ def generate_nft(nft_id):
     
     with open(metadata_file, 'w') as f:
         json.dump(metadata_content, f, indent=4)
-    print(f"✅ Metadata for NFT {nft_id} saved to {metadata_file}")
+    print(f"✅ Base metadata for NFT {nft_id} saved to {metadata_file}")
+    with open(metadata_file_tears, 'w') as f:
+        json.dump(metadata_content_tears, f, indent=4)
+    print(f"✅ Tears metadata for NFT {nft_id} saved to {metadata_file_tears}")
+    with open(metadata_file_blush, 'w') as f:
+        json.dump(metadata_content_blush, f, indent=4)
+    print(f"✅ Blush metadata for NFT {nft_id} saved to {metadata_file_blush}")
     print()
 
 # generate multiple NFTs
 def generate_nft_collection(count):
-    for i in range(1, count + 1):
+    for i in range(0, count):
         generate_nft(i)
 
 # generate 200 NFTs
-generate_nft_collection(200)
+generate_nft_collection(20)
